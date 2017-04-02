@@ -4861,13 +4861,9 @@ var _direct = "DIRECT";						// 1 -> connect directly
 var _prenull = null;						// 0 -> default value 
 var _randomly = null;						// 3 -> select randomly 
 var _anonymous = _tor + '; ' + _i2p;		// 4 -> anonymous proxy 
-// Automatic Configuration Script
-// https://blogs.msdn.microsoft.com
-// /ieinternals/2013/10/11/understanding-web-proxy-configuration/
-// Internet Explorer does not support socks proxy, so you need 
-// a prgram to translate it to http proxy protocol if you are 
-// using Internet Explorer. 
-// "shadowsocks + ProxyCap" is a good solution for Windows users
+// Internet Explorer does not support socks proxy, 
+// so you need to translate it to http proxy protocol 
+// e.g. privoxy, polipo
 var _methodlist = [null, _direct, _proxy, 0, _anonymous, _drop];
 function GetProxyMethod(index) {
 	// select the proxy from the proxylist randomly
@@ -4944,10 +4940,6 @@ function GetKeywordMeta(url, host, domain) {
 // In Chrome, you can disable this by setting 
 // PacHttpsUrlStrippingEnabled to false, in Firefox the preference 
 // is network.proxy.autoconfig_url.include_path.
-// But it seems that full URLs for HTTPS are no longer provided to 
-// PAC scripts (IE11 and Chrome conformed): 
-// https://github.com/FelisCatus/SwitchyOmega/issues/845
-// https://bugs.chromium.org/p/chromium/issues/detail?id=619097
 function FindProxyForURL (url, host) {
 	var domain, result, pos = 0;
 	// check if it's the local host.
